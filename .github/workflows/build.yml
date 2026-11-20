@@ -1,0 +1,15 @@
+name: Build Windows Client
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile C++
+        run: |
+          g++ client.cpp -o Nerogram.exe -lwinhttp -mwindows -s -static
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Nerogram
+          path: Nerogram.exe
